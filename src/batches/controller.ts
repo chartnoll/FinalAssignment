@@ -23,13 +23,14 @@ export default class BatchController {
     @Post('/batches')
     @HttpCode(201)
     async createBatch(
-        @CurrentUser() user: User
-        @Body() update//: GameUpdate
+        @CurrentUser() user: User,
+        @Body() newBatch//: GameUpdate
     ) {
+        console.log(newBatch, "Being created...")
         const entity = await Batch.create({
-            batchNumber: update.batchNumber,
-            startDate: update.startDate,
-            endDate: update.endDate
+            batchNumber: newBatch.newBatchNumber,
+            startDate: newBatch.startDate,
+            endDate: newBatch.endDate
         }).save()
 
         // await Player.create({
