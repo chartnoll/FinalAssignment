@@ -3,7 +3,7 @@ import {
   Body, Patch 
 } from 'routing-controllers'
 import User from '../users/entity'
-import { Game, Player, Board } from './entities'
+import { Batch } from './entities'
 import {IsBoard, isValidTransition, calculateWinner, finished} from './logic'
 import { Validate } from 'class-validator'
 import {io} from '../index'
