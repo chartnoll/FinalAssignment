@@ -19,7 +19,7 @@ import { io } from '../index'
 @JsonController()
 export default class BatchController {
 
-    // @Authorized()
+    @Authorized()
     @Post('/batches')
     @HttpCode(201)
     async createBatch(
@@ -125,7 +125,7 @@ export default class BatchController {
     //     return game
     // }
 
-    // @Authorized()
+    @Authorized()
     @Get('/batches/:id([0-9]+)')
     getGame(
         @Param('id') id: number
@@ -133,7 +133,7 @@ export default class BatchController {
         return Batch.findOneById(id)
     }
 
-    // @Authorized()
+    @Authorized()
     @Get('/batches')
     getGames() {
         return Batch.find()
