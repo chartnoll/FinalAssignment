@@ -19,7 +19,7 @@ import { io } from '../index'
 @JsonController()
 export default class StudentController {
 
-    // @Authorized()
+    @Authorized()
     @Post('/students')
     @HttpCode(201)
     async createStudent(
@@ -41,7 +41,7 @@ export default class StudentController {
         return entity
     }
 
-    // @Authorized()
+    @Authorized()
     @Patch('/students/:id([0-9]+)')
     async editStudent(
         // @CurrentUser() user: User,
@@ -63,7 +63,7 @@ export default class StudentController {
         return newStudent
     }
 
-    // @Authorized()
+    @Authorized()
     @Delete('/students/:id([0-9]+)')
     async deleteStudent(
         @Param('id') studentId: number
@@ -76,15 +76,16 @@ export default class StudentController {
         return `User with ID ${studentId} removed`
     }
 
-    // @Authorized()
+    @Authorized()
     @Get('/students/:id([0-9]+)')
     getStudent(
         @Param('id') id: number
     ) {
+        console.log("Need to find student", id)
         return Student.findOneById(id)
     }
 
-    // @Authorized()
+    @Authorized()
     @Get('/batchStudents/:id([0-9]+)')
     getBatchStudents(
         @Param('id') batchId: number
@@ -93,9 +94,10 @@ export default class StudentController {
         return Student.find({ batchNumber: batchId} )
     }
 
-    // @Authorized()
+    @Authorized()
     @Get('/students')
     getAllStudents() {
+        console.log("Finding all students")
         return Student.find()
     }
 }
