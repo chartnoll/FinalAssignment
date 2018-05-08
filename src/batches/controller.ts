@@ -19,7 +19,7 @@ import { io } from '../index'
 @JsonController()
 export default class BatchController {
 
-    @Authorized()
+    // @Authorized()
     @Post('/batches')
     @HttpCode(201)
     async createBatch(

@@ -1,9 +1,9 @@
-import { BaseEntity, PrimaryGeneratedColumn, Column, Entity } from 'typeorm'
+import { BaseEntity, PrimaryGeneratedColumn, Column, Entity} from 'typeorm'
 // import User from '../users/entity'
 // import { MinLength, IsString, IsEmail } from 'class-validator';
 
 @Entity()
-export default class Student extends BaseEntity {
+export class Student extends BaseEntity {
 
     @PrimaryGeneratedColumn()
     id?: number
@@ -25,11 +25,17 @@ export class Evaluation extends BaseEntity {
     id?: number
 
     @Column('text')
-    studentName: string
+    studentId: number
 
     @Column('text')
-    studentPicture: string
+    teacherId: number
 
-    @Column()
-    batchNumber: number
+    @Column('text')
+    color: string
+
+    @Column('text')
+    remark: string
+
+    @Column('date')
+    date: Date
 }

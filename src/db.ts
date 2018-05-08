@@ -5,7 +5,7 @@ import { snakeCase } from 'typeorm/util/StringUtils'
 import User from './users/entity'
 import { Player, Game } from './games/entities'
 import Batch from './batches/entity'
-import Student from './students/entity'
+import {Student, Evaluation} from './students/entities'
 
 class CustomNamingStrategy extends DefaultNamingStrategy implements NamingStrategyInterface {
 

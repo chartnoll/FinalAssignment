@@ -11,9 +11,9 @@ export default class Batch extends BaseEntity {
     @Column()
     batchNumber: number
 
-    @Column('text')
-    startDate: string
+    @Column('date')
+    startDate: Date
 
-    @Column('text')
-    endDate: string
+    @Column('date')
+    endDate: Date
 }
