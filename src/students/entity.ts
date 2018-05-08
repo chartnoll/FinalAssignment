@@ -17,3 +17,19 @@ export default class Student extends BaseEntity {
     @Column()
     batchNumber: number
 }
+
+@Entity()
+export class Evaluation extends BaseEntity {
+
+    @PrimaryGeneratedColumn()
+    id?: number
+
+    @Column('text')
+    studentName: string
+
+    @Column('text')
+    studentPicture: string
+
+    @Column()
+    batchNumber: number
+}

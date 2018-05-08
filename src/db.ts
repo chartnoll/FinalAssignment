@@ -35,7 +35,8 @@ export default () =>
       Player,
       Game,
       Batch,
-      Student
+      Student,
+      Evaluation
     ],
     synchronize: false, // careful with this in production!
     logging: true,

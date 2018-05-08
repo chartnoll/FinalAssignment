@@ -51,12 +51,18 @@ export default class StudentController {
         const student = await Student.findOneById(studentId)
         if (!student) throw new NotFoundError(`Student does not exist`)
 
+        if (!update.studentName) update.studentName = student.studentName
+        if (!update.studentPicture) update.studentPicture = student.studentPicture
+        if (!update.batchNumber) update.batchNumber = student.batchNumber
+
         const newStudent = await Student.merge(student, update).save()
+
+        // const newStudent = await Student.merge(student, update).save()
 
         console.log('3')
 
         io.emit('action', {
-            type: 'NEW_STUDENT',
+            type: 'UPDATE_STUDENT',
             payload: newStudent
         })
 
