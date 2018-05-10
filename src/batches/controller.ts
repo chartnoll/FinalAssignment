@@ -27,11 +27,7 @@ export default class BatchController {
         @Body() newBatch//: GameUpdate
     ) {
         console.log(newBatch, "Being created...")
-        const entity = await Batch.create({
-            batchNumber: newBatch.newBatchNumber,
-            startDate: newBatch.startDate,
-            endDate: newBatch.endDate
-        }).save()
+        const entity = await Batch.create(newBatch).save()
 
         // await Player.create({
         //     game: entity,
