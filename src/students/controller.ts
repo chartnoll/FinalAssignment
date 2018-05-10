@@ -154,6 +154,11 @@ export class EvaluationController {
         const students = await Student.find({ batchNumber: id })
 
         const evaluations = await Evaluation.find()
+
+        io.emit('action', {
+            type: 'ADD_RANDOMSTUDENT',
+            payload: returnLuckyStudent(students, evaluations)
+        })
         
         return returnLuckyStudent(students, evaluations)
     }
