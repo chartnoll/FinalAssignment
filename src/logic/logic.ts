@@ -40,6 +40,11 @@ export const returnLuckyStudent = (students, evaluations) => {
         evaluation.color == luckyColor)))[0]
 }
 
+export const evaluationCheck = (evaluation) => {
+    if (valuation.date === new Date().toISOString().slice(0, 10)) return true
+    else return false
+}
+
 /*THE FOLLOWING FUNCTIONS SUPPORT THE TEST FUNCTIONS*/
 
 export const selectRandomStudentTester = (evaluations) => {

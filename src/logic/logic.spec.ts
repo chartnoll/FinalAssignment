@@ -1,7 +1,7 @@
 import 'mocha'
 import { equal } from 'assert'
 import {
-    returnLuckyStudentTester,
+    returnLuckyStudentTester, evaluationCheck,
     dateSlicer, accumRandomColor, selectRandomStudentTester} from './logic'
 import { studentData, sortedEvaluations, date, slicedDate, students} from './data'
 
@@ -36,6 +36,12 @@ describe('selectRandomStudent()', () => {
 describe('returnLuckyStudentTester()', () => {
     it('should return true for a lucky student', function () {
         equal(returnLuckyStudentTester(students, sortedEvaluations), true)
+    })
+})
+
+describe('evaluationCheck()', () => {
+    it('should return true for a lucky student', function () {
+        equal(evaluationCheck(sortedEvaluations[0]), false)
     })
 })
 

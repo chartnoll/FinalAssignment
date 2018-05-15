@@ -7,7 +7,7 @@ import {
 import {Student, Evaluation} from './entities'
 import User from '../users/entity'
 import { io } from '../index'
-import { returnLuckyStudent} from '../logic/logic'
+import { returnLuckyStudent, evaluationCheck} from '../logic/logic'
 
 @JsonController()
 export class StudentController {
@@ -71,7 +71,7 @@ export class StudentController {
         return student
     }
 
-    // @Authorized()
+    @Authorized()
     @Get('/students/:id([0-9]+)')
     getStudent(
         @Param('id') id: number
@@ -91,7 +91,7 @@ export class StudentController {
         return Student.find({ batchNumber: batchId} )
     }
 
-    // @Authorized()
+    @Authorized()
     @Get('/students')
     getAllStudents() {
         console.log("Finding all students")
@@ -102,7 +102,7 @@ export class StudentController {
 @JsonController()
 export class EvaluationController {
 
-    @Authorized()
+    // @Authorized()
     @Post('/evaluations')
     @HttpCode(201)
     async createEvaluation(
@@ -116,34 +116,20 @@ export class EvaluationController {
             color: newEvaluation.color,
             remark: newEvaluation.remark,
             date: newEvaluation.date
-        }).save()
+        })
         console.log(entity, "Being created...")
+
+        console.log(entity.date, evaluationCheck(entity),"The test!")
+
+        if (evaluationCheck(newEvaluation)) throw new BadRequestError(`You've already evaluated this student today!`)
 
         io.emit('action', {
             type: 'ADD_EVALUATION',
             payload: entity
         })
 
-        return entity
+        return entity.save()
     }
-
-    // @Authorized()
-    // @Get('/students/:id([0-9]+)')
-    // getStudent(
-    //     @Param('id') id: number
-    // ) {
-    //     console.log("Need to find student", id)
-    //     return Student.findOneById(id)
-    // }
-
-    // @Authorized()
-    // @Get('/batchStudents/:id([0-9]+)')
-    // getBatchStudents(
-    //     @Param('id') batchId: number
-    // ) {
-    //     console.log("Need to find students from batch", batchId)
-    //     return Student.find({ batchNumber: batchId })
-    // }
 
     @Get('/randomstudent/:id([0-9]+)')
     @HttpCode(201)
