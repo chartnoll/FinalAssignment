@@ -1,5 +1,3 @@
-// import { getConnection, getRepository } from "typeorm"
-
 import {
     JsonController, Authorized, CurrentUser, Post, Param, BadRequestError, HttpCode, NotFoundError, ForbiddenError, Get,
     Body, Patch, Delete
@@ -7,7 +5,6 @@ import {
 import {Student, Evaluation} from './entities'
 import User from '../users/entity'
 import { io } from '../index'
-import { returnLuckyStudent, evaluationCheck} from '../logic/logic'
 
 @JsonController()
 export class StudentController {
@@ -17,7 +14,7 @@ export class StudentController {
     @HttpCode(201)
     async createStudent(
         @CurrentUser() user: User,
-        @Body() newStudent//: GameUpdate
+        @Body() newStudent
     ) {
         console.log(newStudent, "Being created...")
         const entity = await Student.create({
@@ -26,20 +23,14 @@ export class StudentController {
             batchNumber: newStudent.batchNumber
         }).save()
 
-        io.emit('action', {
-            type: 'ADD_BATCH',
-            payload: entity
-        })
-
         return entity
     }
 
     @Authorized()
     @Patch('/students/:id([0-9]+)')
     async editStudent(
-        // @CurrentUser() user: User,
         @Param('id') studentId: number,
-        @Body() update//: GameUpdate
+        @Body() update
     ) {
         const student = await Student.findOneById(studentId)
         if (!student) throw new NotFoundError(`Student does not exist`)
@@ -67,8 +58,7 @@ export class StudentController {
         const student = await Student.findOneById(studentId)
         if (!student) throw new NotFoundError(`Student does not exist`)
         await Student.removeById(studentId)
-
-        return student
+        return Student.find()
     }
 
     @Authorized()
@@ -102,51 +92,22 @@ export class StudentController {
 @JsonController()
 export class EvaluationController {
 
-    // @Authorized()
+    @Authorized()
     @Post('/evaluations')
     @HttpCode(201)
     async createEvaluation(
-        // @CurrentUser() user: User,
-        @Body() newEvaluation//: GameUpdate
+        @Body() newEvaluation
     ) {
-        // console.log(newEvaluation, "Being created...")
         const entity = await Evaluation.create({
             studentId: newEvaluation.studentId,
             teacherId: newEvaluation.teacherId,
             color: newEvaluation.color,
             remark: newEvaluation.remark,
             date: newEvaluation.date
-        })
+        }).save()
         console.log(entity, "Being created...")
 
-        console.log(entity.date, evaluationCheck(entity),"The test!")
-
-        if (evaluationCheck(newEvaluation)) throw new BadRequestError(`You've already evaluated this student today!`)
-
-        io.emit('action', {
-            type: 'ADD_EVALUATION',
-            payload: entity
-        })
-
-        return entity.save()
-    }
-
-    @Get('/randomstudent/:id([0-9]+)')
-    @HttpCode(201)
-    async getRandomStudent(
-        @Param('id') id: number
-    ) {
-        console.log("Getting a random student")
-        const students = await Student.find({ batchNumber: id })
-
-        const evaluations = await Evaluation.find()
-
-        io.emit('action', {
-            type: 'ADD_RANDOMSTUDENT',
-            payload: returnLuckyStudent(students, evaluations)
-        })
-        
-        return returnLuckyStudent(students, evaluations)
+        return entity
     }
 
     @Authorized()

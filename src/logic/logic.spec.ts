@@ -1,8 +1,8 @@
 import 'mocha'
 import { equal } from 'assert'
-import {
-    returnLuckyStudentTester, evaluationCheck,
-    dateSlicer, accumRandomColor, selectRandomStudentTester} from './logic'
+// import {
+//     returnLuckyStudentTester, evaluationCheck,
+//     dateSlicer, accumRandomColor, selectRandomStudentTester} from './logic'
 import { studentData, sortedEvaluations, date, slicedDate, students} from './data'
 
 // describe('sortEvaluations()', () => {
@@ -21,29 +21,29 @@ import { studentData, sortedEvaluations, date, slicedDate, students} from './dat
 //     })
 // })
 
-describe('accumRandomColor()', () => {
-    it('should return true if function is working properly', function () {
-        equal(accumRandomColor(), true)
-    })
-})
+// describe('accumRandomColor()', () => {
+//     it('should return true if function is working properly', function () {
+//         equal(accumRandomColor(), true)
+//     })
+// })
 
-describe('selectRandomStudent()', () => {
-    it('should return "hello" is random student returned', function () {
-        equal(selectRandomStudentTester(sortedEvaluations), "hello")
-    })
-})
+// describe('selectRandomStudent()', () => {
+//     it('should return "hello" is random student returned', function () {
+//         equal(selectRandomStudentTester(sortedEvaluations), "hello")
+//     })
+// })
 
-describe('returnLuckyStudentTester()', () => {
-    it('should return true for a lucky student', function () {
-        equal(returnLuckyStudentTester(students, sortedEvaluations), true)
-    })
-})
+// describe('returnLuckyStudentTester()', () => {
+//     it('should return true for a lucky student', function () {
+//         equal(returnLuckyStudentTester(students, sortedEvaluations), true)
+//     })
+// })
 
-describe('evaluationCheck()', () => {
-    it('should return true for a lucky student', function () {
-        equal(evaluationCheck(sortedEvaluations[0]), false)
-    })
-})
+// describe('evaluationCheck()', () => {
+//     it('should return true for a lucky student', function () {
+//         equal(evaluationCheck(sortedEvaluations[0]), false)
+//     })
+// })
 
 
 // describe('testFunction()', () => {
