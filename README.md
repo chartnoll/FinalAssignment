@@ -1,16 +1,9 @@
-# Tic Tac Toe Server
+# Codaisseur Final Assignment Client Side
 
-This is a server for playing a multiplayer Tic Tac Toe game. 
+This is the Server side for an app to evaluator students in the Codaissuer program. You can add and view current batches of students, add and view students progress, and evaluate them. There is also a random student generator that will pick a random stuck from the class to ask a question. The generator is weighted towards students will lower previous evaluation scorings
 
-It has these endpoints:
+The Final Assignment Client side contains the client side for this app
 
-* `POST /users`: sign up as new user
-* `POST /logins`: log in and receive a JWT
-* `POST /games`: create a new game
-* `POST /games/:id/players`: join an existing game
-* `PATCH /games/:id`: update an existing game
-* `GET /games`: list all games
-* `GET /users`: list all users
 
 ## Running
 
